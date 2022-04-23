@@ -1,0 +1,8 @@
+#P planTest2.txt
+#V shipTest.txt
+&
+?3 ShipTest Alpha_1 Alpha_3 
+?2 ShipTest Alpha_1 Alpha_3
+/ Alpha Gamma
+?3 ShipTest Alpha_1 Alpha_3 
+?2 ShipTest Alpha_1 Alpha_3
