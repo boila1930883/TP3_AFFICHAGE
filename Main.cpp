@@ -8,7 +8,6 @@ Description: Il s'agit d'un jeu de simulation ou le joueur doit faire la gestion
 #include <iostream>
 #include "Counter.h"
 #include "GameBoard.h"
-#include <opencv2/opencv.hpp>
 
 using namespace std;
 
@@ -17,7 +16,6 @@ void displayClassBalance();
 int main(void) {
 
 	setlocale(LC_CTYPE, "fr-FR");					// Permet l'affichage des caracteres francophones
-	cout << "Hello World";
 	gameBoard();
 	displayClassBalance();
 

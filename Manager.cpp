@@ -4,6 +4,7 @@
 #include "Manager.h"
 #include "Counter.h"
 #include <stack>
+#include "GalaxyPrinter.h"
 
 using namespace std;
 
@@ -162,7 +163,7 @@ double* Manager::recalGalaxy(bool type = 0) {
 }
 
 // Creer chemin. true = 1 = prix, false = 0 = distance
-void Manager::calChemin(string shipName, string startName, string endName, bool type)
+void Manager::calChemin(string shipName, string startName, string endName, bool type, vector<Planet*>* pathPlanet)
 {
 	changerShip(archive->findSpaceship(shipName));
 	Planet* start = archive->findPlanet(startName);
@@ -245,9 +246,12 @@ void Manager::calChemin(string shipName, string startName, string endName, bool 
 	int current = mainGax->GetPlanetId(end);
 	std::string path = "";
 	while (current != mainGax->GetPlanetId(start)) {
+		pathPlanet->push_back(mainGax->getPlanetsList()->at(current));
 		path = ", " + mainGax->getPlanetsList()->at(current)->getName() + path;
 		current = chemin[current];
 	}
+
+	pathPlanet->push_back(start);
 	path = start->getName() + path + ".";
 	cout << path << endl << endl;
 
@@ -335,4 +339,12 @@ void Manager::displayAllInformations()
 	}
 
 	cout << endl << endl;
+}
+
+void Manager::afficherGalaxie() {
+	GalaxyPrinter::PrintGalaxy(this, archive, mainGax);
+}
+
+void Manager::printPath(vector<Planet*>* path) {
+	GalaxyPrinter::PrintAPath(this, archive, path);
 }

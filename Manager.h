@@ -42,7 +42,7 @@ public:
 	bool cheminExistant(std::string shipName, std::string startName, std::string endName);
 
 	//	-Calculs du chemin 
-	void calChemin(std::string shipName, std::string startName, std::string endName, bool type);
+	void calChemin(std::string shipName, std::string startName, std::string endName, bool type, std::vector<Planet*>* pathPlanet);
 
 	//generation des Guerres (ajout/enleve)
 	void ajoutGuerre(std::string n1, std::string n2);
@@ -53,4 +53,8 @@ public:
 
 	// afficher tous les informations
 	void displayAllInformations();
+
+	// BONUS -- AFFICHER GALAXIE
+	void afficherGalaxie();
+	void printPath(std::vector<Planet*>* path);
 };

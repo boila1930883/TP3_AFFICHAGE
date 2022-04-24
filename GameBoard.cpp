@@ -38,6 +38,7 @@ void automaticMode() {
 	Archivist* archivist = new Archivist();
 	Manager* gm = new Manager(archivist);
 
+	vector<Planet*>* path = nullptr;
 	string fileName, currentFile, ship, planet1, planet2;
 	ifstream transactionFile;
 	char opCode, index;
@@ -87,10 +88,14 @@ void automaticMode() {
 					}
 				}
 				if (index == '2') {		// Affiche le plus court chemin ainsi que la distance totale que peut parcourir ce type de vaisseau
-					gm->calChemin(ship, planet1, planet2, false);
+					path = new vector<Planet*>(0);
+					gm->calChemin(ship, planet1, planet2, false, path);
+					delete path;
 				}
 				if (index == '3') {		// Affiche le chemin et le coût du trajet le moins dispendieux que peut suivre ce type de vaisseau
-					gm->calChemin(ship, planet1, planet2, true);
+					path = new vector<Planet*>(0);
+					gm->calChemin(ship, planet1, planet2, true, path);
+					delete path;
 				}
 				break;
 			case '/':		// Applique un scénario de conflit spatial entre deux nations
@@ -125,6 +130,7 @@ void manualMode() {
 	Archivist* archivist = new Archivist();
 	Manager* gm = new Manager(archivist);
 
+	vector<Planet*>* path = nullptr;
 	string fileName, ship, planet1, planet2;
 	ifstream currentFile;
 	bool existingRoute, quitGame(false), planetsLoaded = false, shipsLoaded = false;
@@ -174,15 +180,24 @@ void manualMode() {
 				break;
 			}
 			questionParameters(ship, planet1, planet2);
-			gm->calChemin(ship, planet1, planet2, false);
+
+			path = new vector<Planet*>(0);
+
+			gm->calChemin(ship, planet1, planet2, false, path);
+			gm->printPath(path);
+			delete path;
 			break;
 		case 5:				// Affiche le chemin et le coût du trajet le moins dispendieux que peut suivre ce type de vaisseau
 			if (!(shipsLoaded && planetsLoaded)) {
 				cout << "Les planetes et/ou les vaisseaux n'ont pas encore ete specifie. Il faut les specifier avant de jouer. \n";
 				break;
 			}
+
+			path = new vector<Planet*>(0);
 			questionParameters(ship, planet1, planet2);
-			gm->calChemin(ship, planet1, planet2, true);
+			gm->calChemin(ship, planet1, planet2, true, path);
+			gm->printPath(path);
+			delete path;
 			break;
 		case 6:				// Applique un scénario de conflit spatial entre deux nations
 			if (!(shipsLoaded && planetsLoaded)) {
@@ -202,7 +217,21 @@ void manualMode() {
 			}
 			gm->displayAllInformations();
 			break;
+
+		case 8:
+			if (!(shipsLoaded && planetsLoaded)) {
+				cout << "Les planetes et/ou les vaisseaux n'ont pas encore ete specifie. Il faut les specifier avant de jouer. \n";
+				break;
+			}
+			gm->afficherGalaxie();
+			break;
+
 		default:			// Quitter la partie
+
+			if (selection != 9) {
+				cout << "Erreur, choix inconnu." << endl;
+				break;
+			}
 			quitGame = true;
 			delete gm;
 			cout << endl << "     AU REVOIR !" << endl;
@@ -223,7 +252,8 @@ int manualModeMenu() {
 	cout << " 5 - Afficher le chemin le moins dispendieux entre deux planètes avec un type de vaisseau" << endl;
 	cout << " 6 - Appliquer un scénario de conflit entre deux nations" << endl;
 	cout << " 7 - Afficher toutes les planetes, les vaisseaux et les conflits en cours" << endl;
-	cout << " 8 - Quitter le jeu" << endl << endl;
+	cout << " 8 - Afficher la galaxie (C'est vraiment cool, ca fait le jeu de ressources de l'annee !!!)" << endl;
+	cout << " 9 - Quitter le jeu" << endl << endl;
 	cout << "Quel est votre choix? ";
 	cin >> selection;
 	cout << endl;

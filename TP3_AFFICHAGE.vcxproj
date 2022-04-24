@@ -22,9 +22,11 @@
     <ClCompile Include="Archivist.cpp" />
     <ClCompile Include="Counter.cpp" />
     <ClCompile Include="Galaxy.cpp" />
+    <ClCompile Include="GalaxyPrinter.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="Nation.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="Spaceship.cpp" />
     <ClCompile Include="WarScript.cpp" />
@@ -33,8 +35,10 @@
     <ClInclude Include="Archivist.h" />
     <ClInclude Include="Counter.h" />
     <ClInclude Include="Galaxy.h" />
+    <ClInclude Include="GalaxyPrinter.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="Nation.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="Spaceship.h" />
     <ClInclude Include="WarScript.h" />
