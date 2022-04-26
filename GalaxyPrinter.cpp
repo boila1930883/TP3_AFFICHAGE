@@ -55,8 +55,10 @@ cv::Mat GalaxyPrinter::CreateGalaxy(Manager* manager, Archivist* archivist, Gala
 
 	// Nous mettons les points pour les planetes
 	for (int i = 0; i < archivist->getPlanetList()->size(); i++) {
-		if (archivist->getPlanetList()->at(i)->getPositionX() > GALAXY_SIZE || archivist->getPlanetList()->at(i)->getPositionY() > GALAXY_SIZE)
+		if (archivist->getPlanetList()->at(i)->getPositionX() > GALAXY_SIZE || archivist->getPlanetList()->at(i)->getPositionY() > GALAXY_SIZE) {
+			planetsNotPrinted->push_back(archivist->getPlanetList()->at(i));
 			continue;
+		}
 
 		circle(img, Point(archivist->getPlanetList()->at(i)->getPositionX(), GALAXY_SIZE - archivist->getPlanetList()->at(i)->getPositionY()), 2, PlanetToColor(archivist->getPlanetList()->at(i), listNations), FILLED);
 	}
@@ -70,6 +72,13 @@ cv::Mat GalaxyPrinter::CreateGalaxy(Manager* manager, Archivist* archivist, Gala
 		cout << planetsNotPrinted->at(i)->getName() << endl;
 
 	cout << "*** Si la fenetre freeze/bug, attendez 10s et elle se fermera seule et le programme continuera" << endl;
+
+	// Supprime liste nations et planetes non affichees
+	for (int i = 0; i < listNations->size(); i++)
+		delete listNations->at(i);
+
+	delete listNations;
+	delete planetsNotPrinted;
 
 	return img;
 }

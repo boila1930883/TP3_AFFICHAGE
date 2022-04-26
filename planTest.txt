@@ -1,4 +1,4 @@
 Alpha_5 0 0 27036 Alpha 1
-Gamma_3 5 0 43682 Gamma 10
-Gamma_2 0 5 43682 Gamma 0.5
-Gamma_4 10 10 43682 Gamma 10
+Gamma_3 500 0 43682 Gamma 10
+Gamma_2 0 500 43682 Gamma 0.5
+Gamma_4 10001 10 43682 Gamma 10
